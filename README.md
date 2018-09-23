@@ -1,5 +1,33 @@
-# quiz-game-gophercies
-Quiz Game from gophercies
 
-Need to finish bonus section 1 & 2
-Find in student github
+# quiz-game-gophercies
+
+Quiz Game from gophercies where user must answer question
+
+  
+
+# Local Installation
+
+1. Clone this project
+
+2. Install all package
+
+	```sh
+	go get ./...
+	```
+
+3. Build this project
+
+	```sh
+	go build .
+	```
+
+4. Run project
+
+	```sh
+	./quiz-game-gophercies -limit=time limit -csv=csv file
+	```
+	| Flag | Description | Example |
+	|--|--| -- |
+	| limit | Quiz time limit in second, default (30s) | ```-limit=5``` |
+	| csv | Csv file | ```-csv=problem.csv```
+

@@ -18,7 +18,6 @@ func main() {
 	csvFileName := flag.String("csv", "problem.csv", "a csv file in the format of 'question, answer'")
 	timeLimit := flag.Int("limit", 30, "the time limit for the quiz in seconds")
 	flag.Parse()
-	_ = csvFileName
 
 	file, err := os.Open(*csvFileName)
 	if err != nil {
