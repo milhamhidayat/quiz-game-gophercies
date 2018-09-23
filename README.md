@@ -24,10 +24,11 @@ Quiz Game from gophercies where user must answer question
 4. Run project
 
 	```sh
-	./quiz-game-gophercies -limit=time limit -csv=csv file
+	./quiz-game-gophercies -limit=time limit -csv=csv file -random=flag to randomize quiz 
 	```
 	| Flag | Description | Example |
 	|--|--| -- |
 	| limit | Quiz time limit in second, default (30s) | ```-limit=5``` |
 	| csv | Csv file | ```-csv=problem.csv```
+	| random | boolean random (true, false) | ```-random=true```
 
