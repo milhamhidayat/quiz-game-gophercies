@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/csv"
 	"flag"
 	"fmt"
@@ -30,7 +31,8 @@ func main() {
 	}
 	// read csv file
 	r := csv.NewReader(file)
-	// reads all remaining record from r, to array 2 dimension (contain item from csv file)
+	// reads all remaining record from r to end of file,
+	// to array 2 dimension (contain item from csv file)
 	lines, err := r.ReadAll()
 
 	if err != nil {
@@ -42,6 +44,8 @@ func main() {
 	// NewTimer -> create a new timer
 	// Duration -> to enable create new timer if NewTimer time is already stored in variable
 	timer := time.NewTimer(time.Duration(*timeLimit) * time.Second)
+
+	reader := bufio.NewReader(os.Stdin)
 
 	// counter to correct answer
 	correct := 0
@@ -57,10 +61,21 @@ func main() {
 
 		// create go routine to accept answer & to not block timer
 		go func() {
-			var answer string
+			// var answer string
 
-			// get answer from command line
-			fmt.Scanf("%s\n", &answer)
+			// // get answer from command line
+			// fmt.Scanf("%s\n", &answer)
+			// fmt.Println(answer)
+			// answer = strings.Replace(answer, "\n", "", -1)
+			// answer = strings.ToLower(answer)
+			// answer = strings.TrimSpace(answer)
+
+			// if answer == p.A {
+			// 	fmt.Println("ok")
+			// }
+
+			// read and return a strin
+			answer, _ := reader.ReadString('\n')
 
 			// return answer to answser channel
 			answerCh <- answer
@@ -82,11 +97,18 @@ func main() {
 
 		// jika menerima answer
 		case answer := <-answerCh:
-
 			// jika answer = jawaban asli, tambah nilai correct
-			if answer == p.A {
+			var newAnswer string
+			newAnswer = strings.Replace(answer, "\n", "", -1)
+			newAnswer = strings.ToLower(newAnswer)
+			newAnswer = strings.TrimSpace(newAnswer)
+			if newAnswer == strings.ToLower(p.A) {
 				correct++
 			}
+
+			// if answer == p.A {
+			// 	correct++
+			// }
 		}
 
 	}
@@ -100,7 +122,6 @@ func parseLines(lines [][]string) []Problem {
 	// perulangan untuk mengisi slice ret dengan question dan problem
 	for i, line := range lines {
 		// isi nilai array dari index 0, dengan struct Problem
-
 		ret[i] = Problem{
 			// question(Q) diisi dengan indeks 0 dari arr line
 
